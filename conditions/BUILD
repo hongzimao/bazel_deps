@@ -37,12 +37,20 @@ config_setting(
     },
 )
 
+config_setting(
+    name = "cpu_wasm",
+    values = {
+        "cpu" : "wasm",
+    },
+)
+
 alias(
     name = "x86_64",
     actual = select({
         ":cpu_local" : ":cpu_local",
         ":cpu_k8" : ":cpu_k8",
         ":cpu_darwin_x86_64" : ":cpu_darwin_x86_64",
+        ":cpu_wasm": ":cpu_wasm",
         "//conditions:default" : ":cpu_local",
     }),
 )
